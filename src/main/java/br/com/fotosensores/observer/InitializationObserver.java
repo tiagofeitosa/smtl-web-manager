@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import javax.servlet.ServletContext;
 
 import br.com.fotosensores.model.Service;
+import br.com.fotosensores.util.JPAUtil;
 
 @ApplicationScoped
 public class InitializationObserver {
@@ -20,11 +21,12 @@ public class InitializationObserver {
 
 	@SuppressWarnings("unchecked")
 	public InitializationObserver() {
-		manager = Persistence.createEntityManagerFactory("default").createEntityManager();
+		manager = JPAUtil.getEntityManager();
 		manager.getTransaction().begin();
 		Query query = manager.createNativeQuery("select * from service", Service.class);
 		list = query.getResultList();
 		manager.getTransaction().commit();
+		manager.close();
 	}
 	
 	public void init(@Observes ServletContext context) {
@@ -34,7 +36,7 @@ public class InitializationObserver {
 			@Override
 			public void run() {
 				for (Service service : list) {
-					String[] cmd = {"/bin/bash","-c","echo 415263 | sudo -S " + service.getPath() + " start"};
+					String[] cmd = {"/bin/bash","-c","echo foto123 | sudo -S " + service.getPath() + " start"};
 				    try {
 						Process pb = Runtime.getRuntime().exec(cmd);
 					} catch (IOException e) {

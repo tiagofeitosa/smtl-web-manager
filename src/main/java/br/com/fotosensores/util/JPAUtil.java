@@ -6,20 +6,22 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 
+	private static EntityManagerFactory emf;
+	private static EntityManager em;
+
+	private JPAUtil() {
+		this.emf = Persistence.createEntityManagerFactory(Constants.DEFAULT.getValor());
+		this.em = emf.createEntityManager();
+	}
 
 	public static EntityManager getEntityManager() {
-		EntityManagerFactory emf = null;
-		EntityManager entityManager = null;
-		
-		try {
-			emf = Persistence.createEntityManagerFactory("default");
-			entityManager = emf.createEntityManager();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-//		} finally {
-//			emf.close();
-//		}
-		return entityManager;
+		new JPAUtil();
+		return em;
 	}
+
+	public static void close() {
+		em.close();
+		emf.close();
+	}
+
 }
