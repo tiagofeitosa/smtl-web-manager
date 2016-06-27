@@ -6,7 +6,7 @@
   </div>
   <div class="form-group">
     <label for="path">Path</label>
-    <input type="text" class="form-control" id="path" name="service.path" value="${service.path}" placeholder="/opt/services/service-meuservico" >
+    <input type="text" class="form-control" id="path" name="service.path" value="${service.path}" placeholder="/etc/init.d/service-meuservico" >
   </div>
   <button type="submit" class="btn btn-default">Salvar</button>
 </form>

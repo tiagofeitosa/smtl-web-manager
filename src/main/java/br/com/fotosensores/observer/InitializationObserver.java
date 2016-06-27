@@ -36,7 +36,8 @@ public class InitializationObserver {
 			@Override
 			public void run() {
 				for (Service service : list) {
-					String[] cmd = {"/bin/bash","-c","echo foto123 | sudo -S " + service.getPath() + " start"};
+					
+					String[] cmd = {"echo foto123 | sudo -S " + service.getPath() + " start"};
 				    try {
 						Process pb = Runtime.getRuntime().exec(cmd);
 					} catch (IOException e) {
