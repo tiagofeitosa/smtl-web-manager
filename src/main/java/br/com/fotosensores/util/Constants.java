@@ -1,7 +1,7 @@
 package br.com.fotosensores.util;
 
 public enum Constants {
-	DEFAULT("default");
+	DEFAULT("default"), ALL("all");
 	
 	private String value;
 	

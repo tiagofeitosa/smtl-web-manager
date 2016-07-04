@@ -3,8 +3,9 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Service</th>
-			<th>Path</th>
+			<th>Serviço</th>
+			<th>Comando</th>
+			<th></th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -16,7 +17,15 @@
 				<td>${service.path}</td>
 				<td><a href="${linkTo[ServicesController].form(service.id)}">editar</a></td>
 				<td><a href="${linkTo[ServicesController].remove(service.id)}">remover</a></td>
+				<td><input type="button" onclick="send(this);"
+					class="btn btn-primary" value="" id="btn-${service.id}"></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
+
+<a class="btn btn-primary" role="button"
+	href="${linkTo[ServicesController].form(service.id)}">Novo</a>
+
+<script src="<c:url value='/js/webSocketServiceStatus.js'/>"></script>
+
