@@ -15,7 +15,7 @@ public class InitServicesListener implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		
+
 	}
 
 	@Override
@@ -26,7 +26,8 @@ public class InitServicesListener implements ServletContextListener {
 				public void run() {
 					String[] cmd = { "sudo", service.getPath(), "start" };
 					try {
-						Util.executeCommand(cmd);
+						if (service.getSysIni())
+							Util.executeCommand(cmd);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

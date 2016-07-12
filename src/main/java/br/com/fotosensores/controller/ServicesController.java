@@ -24,7 +24,7 @@ public class ServicesController {
 
 	@Inject
 	private ServiceDAO dao;
-	
+
 	@Inject
 	private Result result;
 
@@ -33,23 +33,23 @@ public class ServicesController {
 
 	@Post("/services/save")
 	public void save(@NotNull @Valid Service service) {
-	
+
 		validation.onErrorRedirectTo(this).form(null);
-		
+
 		if (service.getId() == null) {
 			dao.save(service);
 		} else {
 			dao.update(service);
 		}
-		
+
 		result.redirectTo(this).list();
 	}
 
-	@Path({"/services/form/{id}", "/services/form/"})
+	@Path({ "/services/form/{id}", "/services/form/" })
 	public void form(Long id) {
-		
+
 		Service service;
-		
+
 		if (id != null) {
 			service = dao.findById(id);
 			result.include("service", service);
@@ -65,6 +65,12 @@ public class ServicesController {
 	@Path("/services/list")
 	public void list() {
 		List<Service> services = dao.listAll();
-		result.include("services", services);		
+		result.include("services", services);
+	}
+
+	@Path("/services/list/{id}/{startup}")
+	public void ajax(Long id, Boolean startup) {
+		Service service = dao.findById(id);
+		service.setSysIni(startup);
 	}
 }

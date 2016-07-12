@@ -19,6 +19,16 @@ public class Service {
 	@Column(nullable=false)
 	@NotNull
 	String path;
+	
+	Boolean sysIni;
+
+	public Boolean getSysIni() {
+		return sysIni;
+	}
+
+	public void setSysIni(Boolean sysIni) {
+		this.sysIni = sysIni;
+	}
 
 	public Long getId() {
 		return id;
